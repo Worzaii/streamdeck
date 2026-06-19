@@ -4,6 +4,7 @@ import { WsAction } from "./actions/ws-action";
 import { WSPingTest } from "./actions/wsping-test";
 
 import { websocketManager } from "./websocket/websocket-manager";
+import { WsDebugEcho } from "./actions/wsdebug-echo";
 
 console.log(`Starting the websocketManager.`);
 
@@ -16,6 +17,8 @@ streamDeck.logger.setLevel("trace");
 streamDeck.actions.registerAction(new WsAction());
 
 streamDeck.actions.registerAction(new WSPingTest());
+
+streamDeck.actions.registerAction(new WsDebugEcho());
 
 // Finally, connect to the Stream Deck.
 streamDeck.connect();

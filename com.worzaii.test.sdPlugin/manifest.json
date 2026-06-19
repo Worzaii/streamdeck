@@ -30,6 +30,20 @@
           "TitleAlignment": "middle"
         }
       ]
+    },
+    {
+      "Name": "WSDebugEcho",
+      "UUID": "com.worzaii.test.wsdebug-echo",
+      "Icon": "imgs/actions/button-press/icon",
+      "Tooltip": "Tests custom action with payload.",
+      "PropertyInspectorPath": "ui/ws-debug.echo.html",
+      "Controllers": ["Keypad"],
+      "States": [
+        {
+          "Image": "imgs/actions/counter/key",
+          "TitleAlignment": "middle"
+        }
+      ]
     }
   ],
   "Category": "test",
