@@ -4,12 +4,10 @@ import {
   KeyDownEvent,
   SingletonAction,
   WillAppearEvent,
-  DidReceiveSettingsEvent,
 } from "@elgato/streamdeck";
 import { websocketManager } from "../websocket/websocket-manager";
 
 type ButtonPressSettings = {
-  websocketUrl?: string;
   action?: string;
 };
 
