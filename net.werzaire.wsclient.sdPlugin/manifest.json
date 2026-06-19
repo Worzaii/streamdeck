@@ -1,14 +1,14 @@
 {
-  "Name": "test",
+  "Name": "wsclient",
   "Version": "0.1.0.0",
   "Author": "Worzaii",
   "Actions": [
     {
-      "Name": "WSTest",
-      "UUID": "com.worzaii.test.ws-action",
+      "Name": "Command",
+      "UUID": "net.werzaire.wsclient.command",
       "Icon": "imgs/actions/button-press/icon",
       "Tooltip": "Displays a message when pressed.",
-      "PropertyInspectorPath": "ui/ws-action.html",
+      "PropertyInspectorPath": "ui/command.html",
       "Controllers": ["Keypad"],
       "States": [
         {
@@ -18,11 +18,11 @@
       ]
     },
     {
-      "Name": "WSPingTest",
-      "UUID": "com.worzaii.test.wsping-test",
+      "Name": "Ping",
+      "UUID": "net.werzaire.wsclient.ping-test",
       "Icon": "imgs/actions/button-press/icon",
       "Tooltip": "Tests the websocket server connection. Should return a pong response.",
-      "PropertyInspectorPath": "ui/wsping-test.html",
+      "PropertyInspectorPath": "ui/ping-test.html",
       "Controllers": ["Keypad"],
       "States": [
         {
@@ -32,11 +32,11 @@
       ]
     },
     {
-      "Name": "WSDebugEcho",
-      "UUID": "com.worzaii.test.wsdebug-echo",
+      "Name": "CommandPayload",
+      "UUID": "net.werzaire.wsclient.command-payload",
       "Icon": "imgs/actions/button-press/icon",
       "Tooltip": "Tests custom action with payload.",
-      "PropertyInspectorPath": "ui/ws-debug.echo.html",
+      "PropertyInspectorPath": "ui/command-payload.html",
       "Controllers": ["Keypad"],
       "States": [
         {
@@ -69,5 +69,5 @@
     "Version": "24",
     "Debug": "enabled"
   },
-  "UUID": "com.worzaii.test"
+  "UUID": "net.werzaire.wsclient"
 }

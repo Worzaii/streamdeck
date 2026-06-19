@@ -1,10 +1,10 @@
 import streamDeck from "@elgato/streamdeck";
 
-import { WsAction } from "./actions/ws-action";
-import { WSPingTest } from "./actions/wsping-test";
+import { Command } from "./actions/command";
+import { PingTest } from "./actions/ping-test";
 
 import { websocketManager } from "./websocket/websocket-manager";
-import { WsDebugEcho } from "./actions/wsdebug-echo";
+import { CommandPayload } from "./actions/command-payload";
 
 console.log(`Starting the websocketManager.`);
 
@@ -14,11 +14,11 @@ websocketManager.connect();
 streamDeck.logger.setLevel("trace");
 
 // Register the button press action.
-streamDeck.actions.registerAction(new WsAction());
+streamDeck.actions.registerAction(new Command());
 
-streamDeck.actions.registerAction(new WSPingTest());
+streamDeck.actions.registerAction(new PingTest());
 
-streamDeck.actions.registerAction(new WsDebugEcho());
+streamDeck.actions.registerAction(new CommandPayload());
 
 // Finally, connect to the Stream Deck.
 streamDeck.connect();

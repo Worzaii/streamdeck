@@ -4,7 +4,6 @@ import {
   KeyDownEvent,
   SingletonAction,
   WillAppearEvent,
-  DidReceiveSettingsEvent,
 } from "@elgato/streamdeck";
 import WebSocket from "ws";
 
@@ -13,12 +12,12 @@ type ButtonPressSettings = {
   websocketMessage?: string;
 };
 
-@action({ UUID: "com.worzaii.test.wsping-test" })
-export class WSPingTest extends SingletonAction<ButtonPressSettings> {
+@action({ UUID: "net.werzaire.wsclient.ping-test" })
+export class PingTest extends SingletonAction<ButtonPressSettings> {
   override onWillAppear(
     ev: WillAppearEvent<ButtonPressSettings>,
   ): void | Promise<void> {
-    streamDeck.logger.info("WSPingTest action appeared");
+    streamDeck.logger.info("PingTest action appeared");
   }
 
   override async onKeyDown(
@@ -29,13 +28,6 @@ export class WSPingTest extends SingletonAction<ButtonPressSettings> {
     const websocketUrl = "ws://localhost:3000";
     const action = { action: "ping" };
     const websocketMessage = JSON.stringify(action);
-    console.log(
-      `I want to send: ${action} and it's been converted to ${websocketMessage}`,
-    );
-
-    streamDeck.logger.info(
-      `Connecting to ${websocketUrl} and sending '${websocketMessage}'`,
-    );
 
     const ws = new WebSocket(websocketUrl);
 

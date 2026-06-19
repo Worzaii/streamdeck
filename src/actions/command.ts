@@ -9,15 +9,14 @@ import { websocketManager } from "../websocket/websocket-manager";
 
 type ButtonPressSettings = {
   action?: string;
-  payload?: string;
 };
 
-@action({ UUID: "com.worzaii.test.wsdebug-echo" })
-export class WsDebugEcho extends SingletonAction<ButtonPressSettings> {
+@action({ UUID: "net.werzaire.wsclient.command" })
+export class Command extends SingletonAction<ButtonPressSettings> {
   override async onWillAppear(
     ev: WillAppearEvent<ButtonPressSettings>,
   ): Promise<void> {
-    streamDeck.logger.info("WsDebugEcho action appeared");
+    streamDeck.logger.info("Command action appeared");
     if (websocketManager.connected) {
       await ev.action.setTitle("Online");
     } else {
@@ -31,7 +30,6 @@ export class WsDebugEcho extends SingletonAction<ButtonPressSettings> {
     try {
       const response = await websocketManager.sendRequest({
         action: ev.payload.settings.action,
-        payload: ev.payload.settings.payload || "hello world",
       });
 
       if (!response.success) {
