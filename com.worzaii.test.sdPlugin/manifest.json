@@ -1,63 +1,59 @@
 {
-	"Name": "test",
-	"Version": "0.1.0.0",
-	"Author": "Worzaii",
-	"Actions": [
-		{
-			"Name": "Counter",
-			"UUID": "com.worzaii.test.increment",
-			"Icon": "imgs/actions/counter/icon",
-			"Tooltip": "Displays a count, which increments by one on press.",
-			"PropertyInspectorPath": "ui/increment-counter.html",
-			"Controllers": [
-				"Keypad"
-			],
-			"States": [
-				{
-					"Image": "imgs/actions/counter/key",
-					"TitleAlignment": "middle"
-				}
-			]
-		},
-		{
-			"Name": "WSTest",
-			"UUID": "com.worzaii.test.button-press",
-			"Icon": "imgs/actions/button-press/icon",
-			"Tooltip": "Displays a message when pressed.",
-			"PropertyInspectorPath": "ui/websocket-test.html",
-			"Controllers": [
-				"Keypad"
-			],
-			"States": [
-				{
-					"Image": "imgs/actions/counter/key",
-					"TitleAlignment": "middle"
-				}
-			]
-		}
-	],
-	"Category": "test",
-	"CategoryIcon": "imgs/plugin/category-icon",
-	"CodePath": "bin/plugin.js",
-	"Description": "Test plugin",
-	"Icon": "imgs/plugin/marketplace",
-	"SDKVersion": 3,
-	"Software": {
-		"MinimumVersion": "7.1"
-	},
-	"OS": [
-		{
-			"Platform": "mac",
-			"MinimumVersion": "12"
-		},
-		{
-			"Platform": "windows",
-			"MinimumVersion": "10"
-		}
-	],
-	"Nodejs": {
-		"Version": "24",
-		"Debug": "enabled"
-	},
-	"UUID": "com.worzaii.test"
+  "Name": "test",
+  "Version": "0.1.0.0",
+  "Author": "Worzaii",
+  "Actions": [
+    {
+      "Name": "WSTest",
+      "UUID": "com.worzaii.test.ws-action",
+      "Icon": "imgs/actions/button-press/icon",
+      "Tooltip": "Displays a message when pressed.",
+      "PropertyInspectorPath": "ui/ws-action.html",
+      "Controllers": ["Keypad"],
+      "States": [
+        {
+          "Image": "imgs/actions/counter/key",
+          "TitleAlignment": "middle"
+        }
+      ]
+    },
+    {
+      "Name": "WSPingTest",
+      "UUID": "com.worzaii.test.wsping-test",
+      "Icon": "imgs/actions/button-press/icon",
+      "Tooltip": "Tests the websocket server connection. Should return a pong response.",
+      "PropertyInspectorPath": "ui/wsping-test.html",
+      "Controllers": ["Keypad"],
+      "States": [
+        {
+          "Image": "imgs/actions/counter/key",
+          "TitleAlignment": "middle"
+        }
+      ]
+    }
+  ],
+  "Category": "test",
+  "CategoryIcon": "imgs/plugin/category-icon",
+  "CodePath": "bin/plugin.js",
+  "Description": "Test plugin",
+  "Icon": "imgs/plugin/marketplace",
+  "SDKVersion": 3,
+  "Software": {
+    "MinimumVersion": "7.1"
+  },
+  "OS": [
+    {
+      "Platform": "mac",
+      "MinimumVersion": "12"
+    },
+    {
+      "Platform": "windows",
+      "MinimumVersion": "10"
+    }
+  ],
+  "Nodejs": {
+    "Version": "24",
+    "Debug": "enabled"
+  },
+  "UUID": "com.worzaii.test"
 }
