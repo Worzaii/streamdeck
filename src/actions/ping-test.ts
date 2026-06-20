@@ -6,6 +6,7 @@ import {
   WillAppearEvent,
 } from "@elgato/streamdeck";
 import WebSocket from "ws";
+import { websocketManager } from "../websocket/websocket-manager";
 
 type ButtonPressSettings = {
   websocketUrl?: string;
@@ -14,10 +15,15 @@ type ButtonPressSettings = {
 
 @action({ UUID: "net.werzaire.wsclient.ping-test" })
 export class PingTest extends SingletonAction<ButtonPressSettings> {
-  override onWillAppear(
+  override async onWillAppear(
     ev: WillAppearEvent<ButtonPressSettings>,
-  ): void | Promise<void> {
+  ): Promise<void> {
     streamDeck.logger.info("PingTest action appeared");
+    if (websocketManager.connected) {
+      await ev.action.setTitle("Online");
+    } else {
+      await ev.action.setTitle("Offline");
+    }
   }
 
   override async onKeyDown(
@@ -44,13 +50,15 @@ export class PingTest extends SingletonAction<ButtonPressSettings> {
       streamDeck.logger.info(`Received response: ${response}`);
 
       await ev.action.setTitle(jsonResponse.message);
-      await setTimeout(() => {
-        ev.action.setTitle("");
+      setTimeout(() => {
+        if (websocketManager.connected) {
+          ev.action.setTitle("Online");
+        } else {
+          ev.action.setTitle("Offline");
+        }
       }, 5000);
 
       await ev.action.showOk();
-
-      ws.close();
     });
 
     ws.on("error", async (error) => {

@@ -12,6 +12,18 @@ type ButtonPressSettings = {
   payload?: string;
 };
 
+function parsePayload(payload?: string): unknown {
+  if (!payload) {
+    return undefined;
+  }
+
+  try {
+    return JSON.parse(payload);
+  } catch {
+    return payload;
+  }
+}
+
 @action({ UUID: "net.werzaire.wsclient.command-payload" })
 export class CommandPayload extends SingletonAction<ButtonPressSettings> {
   override async onWillAppear(
@@ -31,7 +43,7 @@ export class CommandPayload extends SingletonAction<ButtonPressSettings> {
     try {
       const response = await websocketManager.sendRequest({
         action: ev.payload.settings.action,
-        payload: ev.payload.settings.payload,
+        payload: parsePayload(ev.payload.settings.payload),
       });
 
       if (!response.success) {
@@ -45,7 +57,11 @@ export class CommandPayload extends SingletonAction<ButtonPressSettings> {
         await ev.action.setTitle(response.message);
 
         setTimeout(() => {
-          ev.action.setTitle("");
+          if (websocketManager.connected) {
+            ev.action.setTitle("Online");
+          } else {
+            ev.action.setTitle("Offline");
+          }
         }, 5000);
       }
     } catch (error) {

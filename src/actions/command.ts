@@ -43,7 +43,11 @@ export class Command extends SingletonAction<ButtonPressSettings> {
         await ev.action.setTitle(response.message);
 
         setTimeout(() => {
-          ev.action.setTitle("");
+          if (websocketManager.connected) {
+            ev.action.setTitle("Online");
+          } else {
+            ev.action.setTitle("Offline");
+          }
         }, 5000);
       }
     } catch (error) {
