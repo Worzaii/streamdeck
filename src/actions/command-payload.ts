@@ -10,6 +10,7 @@ import { websocketManager } from "../websocket/websocket-manager";
 type ButtonPressSettings = {
   action?: string;
   payload?: string;
+  responseMode?: "message" | "json" | "none";
 };
 
 function parsePayload(payload?: string): unknown {
@@ -22,6 +23,21 @@ function parsePayload(payload?: string): unknown {
   } catch {
     return payload;
   }
+}
+
+function getResponseTitle(
+  response: any,
+  responseMode?: string,
+): string | undefined {
+  if (responseMode === "none") {
+    return undefined;
+  }
+
+  if (responseMode === "json") {
+    return JSON.stringify(response.data ?? response, null, 2);
+  }
+
+  return response.message;
 }
 
 @action({ UUID: "net.werzaire.wsclient.command-payload" })
@@ -46,6 +62,10 @@ export class CommandPayload extends SingletonAction<ButtonPressSettings> {
         payload: parsePayload(ev.payload.settings.payload),
       });
 
+      streamDeck.logger.info(
+        `CommandPayload response: ${JSON.stringify(response)}`,
+      );
+
       if (!response.success) {
         await ev.action.showAlert();
         return;
@@ -53,8 +73,13 @@ export class CommandPayload extends SingletonAction<ButtonPressSettings> {
 
       await ev.action.showOk();
 
-      if (response.message) {
-        await ev.action.setTitle(response.message);
+      const responseTitle = getResponseTitle(
+        response,
+        ev.payload.settings.responseMode,
+      );
+
+      if (responseTitle) {
+        await ev.action.setTitle(responseTitle);
 
         setTimeout(() => {
           if (websocketManager.connected) {
