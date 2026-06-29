@@ -1,2 +1,9 @@
 # StreamDeck plugin
-Adding a readme for later. It'll describe the use of the plugin when we've tested and created needed handles and sockets down the line.
+
+This plugin will allow for communicating with the [Websocket Server](https://github.com/Worzaii/websocket-server) project and send commands to it to interact with all of the services:
+
+- Twitch
+- Steam
+- Warudo
+- OBS
+- +++?
